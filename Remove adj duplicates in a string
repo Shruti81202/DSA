@@ -1,0 +1,22 @@
+class Solution {
+public:
+    string removeDuplicates(string s) {
+        int i = 0;
+        for(int j = 0;j<s.size();j++){
+            if(i>0 && s[i-1] == s[j]){
+                i--;
+            }
+            else{
+                s[i++] = s[j];
+            }
+        }
+        s.resize(i);
+        return s;
+    }
+    string removeDuplicatesRecursively(string s){
+        string result = removeDuplicates(s);
+        if(result == s) return result;
+        return removeDuplicatesRecursively(result);
+    }
+
+};
