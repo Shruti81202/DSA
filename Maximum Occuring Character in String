@@ -1,0 +1,20 @@
+class Solution
+{
+    public:
+    //Function to find the maximum occurring character in a string.
+    char getMaxOccuringChar(string str)
+    {
+        char ans;
+        int maxFreq = 0, n = str.length();
+        int count[256] = {0};
+        for(int i=0;i<n;i++){
+            count[str[i]]++;
+            if(count[str[i]]>maxFreq || (count[str[i]] == maxFreq && str[i]<ans)){
+                maxFreq = count[str[i]];
+                ans = str[i];
+            }
+        }
+        return ans;
+    }
+
+};
