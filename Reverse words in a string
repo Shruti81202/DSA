@@ -1,0 +1,41 @@
+class Solution {
+public:
+void reverse(string& s, int begin,int end){
+    while(begin < end){
+        swap(s[begin++],s[end--]);
+    }
+}
+    string reverseWords(string s) {
+    int n = s.size();
+    int word_begin = -1, final_pos = 0;
+    
+    // STEP 1. Reverse each word in the string
+    for (int i = 0; i < n; i++) {
+        // Beginning of a word
+        if (word_begin == -1 && s[i] != ' ') {
+            word_begin = i;
+        }
+
+        // End of a word
+        if (word_begin != -1 && (s[i + 1] == ' ' || i + 1 == n)) {
+            reverse(s, word_begin, i);  // Reverse the word
+
+            // Move the word to the front if necessary
+            if (final_pos != 0) {
+                s[final_pos++] = ' ';  // Insert a space between words
+            }
+            
+            // Copy the reversed word to the correct position
+            while (word_begin <= i) {
+                s[final_pos++] = s[word_begin++];
+            }
+            word_begin = -1;  // Reset for the next word
+        }
+    }
+
+    // STEP 2: Reverse the entire string
+    reverse(s, 0, final_pos - 1);
+
+    return s.substr(0, final_pos);  // Return the cleaned and reversed string
+}
+};
