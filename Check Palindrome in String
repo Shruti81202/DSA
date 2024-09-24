@@ -1,0 +1,25 @@
+#include <bits/stdc++.h> 
+bool checkPalindrome(string s)
+{
+    // Write your code here.
+    int left = 0;
+    int right = s.size()-1;
+    while(left<right){
+        char leftChar = tolower(s[left]);
+        char rightChar = tolower(s[right]);
+        if(!isalnum(leftChar)){
+            left++;
+        }
+        else if(!isalnum(rightChar)){
+            right--;
+        }
+        else{
+            if(leftChar != rightChar){
+                return false;
+            }
+            left++;
+            right--;
+        }
+    }
+    return true;
+}
