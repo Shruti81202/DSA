@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+int cutRod(vector<int> &price, int n)
+{
+	vector<vector<int>>dp(n, vector<int>(n+1,0));
+	vector<int>prev(n+1,0);
+	for(int N=0;N<=n;N++){
+		prev[N] = N * price[0];
+	}
+	for(int ind=0;ind<n;ind++){
+		for(int N=0;N<=n;N++){
+			int notTake = 0 + prev[N];
+			int take = INT_MIN;
+			int rodLength = ind+1;
+			if(rodLength <= N){
+				take = price[ind] + prev[N - rodLength]; 
+			}
+			prev[N] = max(take,notTake);
+		}
+	}
+	return prev[n];
+}
